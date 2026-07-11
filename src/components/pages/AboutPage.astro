@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Starfield from '../Starfield.astro';
+
+type Lang = 'zh' | 'en';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = (route: string) => (lang === 'zh' ? route : '/en' + route);
+
+const T = {
+  zh: {
+    title: '关于 · About — airdb.space',
+    desc: 'airdb.space 的愿景与联系方式：我们的征途是星辰大海。',
+    kicker: '05 // ABOUT · WHO WE ARE',
+    h1: '关于',
+    heroText: '一句话说清楚我们是谁：一群相信长期主义的工程师， 把「星辰大海」当作真实的航向，而不是屏保上的壁纸。',
+    visionKicker: 'VISION // 愿景',
+    visionTitle: '星辰大海，是人类共同的方向',
+    vision: [
+      '向上，是深空与群星 —— 从嫦娥、天宫到天问，人类正在把科幻的目录变成工程的日程表。向下，是万米深渊 —— 蛟龙号与奋斗者号刚刚推开那扇门。这两个方向加起来，才是完整的「星辰大海」。',
+      '我们相信探索不专属于某个机构或某个国家，它是全人类共同的事业。而参与这场事业的门票，是扎实的科技积累 —— AI、数据、基础设施，以及公开透明的工程文化。',
+      '所以我们把每一步都走稳：公开地写、公开地错、公开地改进。这个网站本身，就是这种节奏的一次演示。',
+    ],
+    contactKicker: 'CONTACT // 联系我们',
+    contactTitle: '随时保持通联',
+    contactText: '合作、共建，或者只是想聊聊星辰大海 —— 欢迎来信。',
+    email: 'info@airdb.com',
+    ctaHome: '回到首页 →',
+    ctaJourney: '看我们的历程 →',
+  },
+  en: {
+    title: 'About — airdb.space',
+    desc: 'The vision and contact of airdb.space: our voyage is to the stars and the deep sea.',
+    kicker: '05 // ABOUT · WHO WE ARE',
+    h1: 'About',
+    heroText:
+      'Who we are, in one sentence: engineers who believe in the long game, treating “the stars and the sea” as a real heading — not a wallpaper.',
+    visionKicker: 'VISION // THE HEADING',
+    visionTitle: 'The stars and the sea — humanity’s shared direction',
+    vision: [
+      'Above: deep space and the stars — from Chang’e and Tiangong to Tianwen, humanity is turning science fiction’s table of contents into an engineering schedule. Below: the hadal deep — Jiaolong and Fendouzhe have just pushed that door open. Together they make the whole of “the stars and the sea”.',
+      'We believe exploration belongs to no single agency or nation — it is a shared human enterprise. And the ticket to take part is solid technical groundwork: AI, data, infrastructure, and an engineering culture that works in the open.',
+      'So we take every step steadily: write openly, fail openly, improve openly. This website itself is a demonstration of that pace.',
+    ],
+    contactKicker: 'CONTACT // REACH US',
+    contactTitle: 'Keep the channel open',
+    contactText: 'Partnership, collaboration, or just to talk about the stars and the sea — write to us.',
+    email: 'info@airdb.com',
+    ctaHome: 'Back to home →',
+    ctaJourney: 'See our journey →',
+  },
+}[lang];
+---
+
+<Layout lang={lang} path="/about" title={T.title} description={T.desc}>
+  <!-- ============ HERO ============ -->
+  <section class="relative flex h-[72svh] min-h-[520px] items-center overflow-hidden">
+    <Starfield />
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-space"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
+      <p class="kicker rise" style="--rise-delay: 0.1s">{T.kicker}</p>
+      <h1 class="headline-cn rise mt-6 text-5xl text-star md:text-7xl" style="--rise-delay: 0.3s">
+        {T.h1}
+      </h1>
+      <p class="rise mt-8 max-w-xl text-sm leading-loose tracking-wider text-silver md:text-base" style="--rise-delay: 0.6s">
+        {T.heroText}
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 愿景陈述 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+    <div class="md:grid md:grid-cols-[240px_1fr] md:gap-12">
+      <div class="reveal">
+        <p class="kicker">{T.visionKicker}</p>
+      </div>
+      <div>
+        <h2 class="headline-cn reveal text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+          {T.visionTitle}
+        </h2>
+        <div class="mt-10 max-w-2xl space-y-6">
+          {
+            T.vision.map((para, i) => (
+              <p class="reveal text-sm leading-loose text-silver md:text-base" style={`--reveal-delay: ${0.15 + i * 0.1}s`}>
+                {para}
+              </p>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 联系方式 ============ -->
+  <section class="relative border-t border-white/5 bg-void py-24 md:py-32">
+    <div class="mx-auto max-w-7xl px-6 md:px-10">
+      <div class="reveal border border-white/10 p-10 text-center md:p-16">
+        <p class="kicker">{T.contactKicker}</p>
+        <p class="headline-cn mt-6 text-xl text-star md:text-2xl">
+          {T.contactTitle}
+        </p>
+        <p class="mx-auto mt-6 max-w-md text-sm leading-loose text-silver">
+          {T.contactText}
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a
+            href={`mailto:${T.email}`}
+            class="border border-ion/30 px-8 py-3 font-mono text-xs tracking-[0.3em] text-ion transition-all duration-500 hover:border-ion/60 hover:bg-ion/5"
+          >
+            ✉ {T.email.toUpperCase()}
+          </a>
+          <a
+            href="https://github.com/airdb"
+            target="_blank"
+            rel="noopener"
+            class="border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-white/30 hover:text-star"
+          >
+            GITHUB.COM/AIRDB ↗
+          </a>
+        </div>
+        <div class="mt-12 flex flex-wrap justify-center gap-6 font-mono text-xs tracking-[0.25em] text-dim">
+          <a href={p('/')} class="transition-colors hover:text-star">{T.ctaHome}</a>
+          <a href={p('/journey')} class="transition-colors hover:text-deepsea">{T.ctaJourney}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

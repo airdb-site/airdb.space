@@ -1,0 +1,177 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Starfield from '../Starfield.astro';
+
+type Lang = 'zh' | 'en';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = (route: string) => (lang === 'zh' ? route : '/en' + route);
+
+const T = {
+  zh: {
+    title: '星辰 · Space — airdb.space',
+    desc: '人类航天里程碑与中国航天大事记：从斯普特尼克到嫦娥六号，从东方红一号到载人登月。',
+    kicker: '01 // SPACE · MISSION LOG',
+    h1: '星辰',
+    heroText:
+      '从 1957 年的第一声脉冲，到写进日程表的载人登月。 这是一份仍在续写的任务日志 —— 每一行，都是人类离开摇篮的一次点火。',
+    legend: [
+      { cls: 'text-silver', label: '◦ WORLD 人类里程碑' },
+      { cls: 'text-ion', label: '◦ CN 中国航天' },
+      { cls: 'text-engine', label: '◦ FUTURE 已规划' },
+    ],
+    chapters: [
+      { id: 'dawn', no: 'CH.1', title: '破晓', range: '1957 — 1970', blurb: '第一颗卫星、第一个人、第一枚月面脚印 —— 人类推开了摇篮的门。' },
+      { id: 'voyage', no: 'CH.2', title: '远航', range: '1971 — 1998', blurb: '空间站、星际探测器与太空望远镜，探索从冲刺变成长跑。' },
+      { id: 'relay', no: 'CH.3', title: '接力', range: '2003 — 2015', blurb: '中国航天进入载人与探月的快车道，商业航天点燃可复用革命。' },
+      { id: 'deepspace', no: 'CH.4', title: '深空时代', range: '2019 — 今', blurb: '月背、火星、月壤返回与常态化驻留 —— 深空成为日常工作现场。' },
+      { id: 'next', no: 'CH.5', title: '下一步', range: 'FUTURE', blurb: '已经写进日程表的未来：采样返回、载人登月、月球科研站。' },
+    ],
+    endKicker: 'NEXT ENTRY // 待续',
+    endTitle: '日志的下一行，正在写。',
+    ctaOcean: '潜入大海 →',
+    ctaTech: '看看我们的科技 →',
+  },
+  en: {
+    title: 'Space — airdb.space',
+    desc: 'Milestones of human spaceflight and China’s aerospace program: from Sputnik to Chang’e 6, from Dongfanghong-1 to a crewed lunar landing.',
+    kicker: '01 // SPACE · MISSION LOG',
+    h1: 'Space',
+    heroText:
+      'From the first pulse of 1957 to a crewed lunar landing already on the calendar. This is a mission log still being written — every line, an ignition carrying humanity out of the cradle.',
+    legend: [
+      { cls: 'text-silver', label: '◦ WORLD MILESTONES' },
+      { cls: 'text-ion', label: '◦ CN CHINA AEROSPACE' },
+      { cls: 'text-engine', label: '◦ FUTURE PLANNED' },
+    ],
+    chapters: [
+      { id: 'dawn', no: 'CH.1', title: 'First Light', range: '1957 — 1970', blurb: 'The first satellite, the first human, the first footprint — humanity pushes open the cradle door.' },
+      { id: 'voyage', no: 'CH.2', title: 'The Long Voyage', range: '1971 — 1998', blurb: 'Space stations, interstellar probes and telescopes — exploration becomes a marathon, not a sprint.' },
+      { id: 'relay', no: 'CH.3', title: 'The Relay', range: '2003 — 2015', blurb: 'China accelerates into crewed flight and lunar exploration; commercial rockets ignite the reusable revolution.' },
+      { id: 'deepspace', no: 'CH.4', title: 'Deep Space Era', range: '2019 — NOW', blurb: 'Far side, Mars, sample returns, permanent stations — deep space becomes a workplace.' },
+      { id: 'next', no: 'CH.5', title: 'What’s Next', range: 'FUTURE', blurb: 'A future already on the schedule: sample returns, crewed landings, a lunar research station.' },
+    ],
+    endKicker: 'NEXT ENTRY // TO BE CONTINUED',
+    endTitle: 'The next line of the log is being written.',
+    ctaOcean: 'Dive into the ocean →',
+    ctaTech: 'See our technology →',
+  },
+}[lang];
+
+const all = (await getCollection('space-milestones')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const byChapter = (id: string) => all.filter((m) => m.data.chapter === id);
+const loc = (m: (typeof all)[number]) => ({
+  title: lang === 'zh' ? m.data.title : m.data.titleEn,
+  desc: lang === 'zh' ? m.data.desc : m.data.descEn,
+});
+
+const tagStyle = {
+  WORLD: 'text-silver border-silver/30',
+  CN: 'text-ion border-ion/40',
+  FUTURE: 'text-engine border-engine/40',
+} as const;
+---
+
+<Layout lang={lang} path="/space" title={T.title} description={T.desc}>
+  <!-- ============ HERO ============ -->
+  <section class="relative flex h-[72svh] min-h-[520px] items-center overflow-hidden">
+    <Starfield />
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-space"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
+      <p class="kicker rise" style="--rise-delay: 0.1s">{T.kicker}</p>
+      <h1 class="headline-cn rise mt-6 text-5xl text-star md:text-7xl" style="--rise-delay: 0.3s">
+        {T.h1}
+      </h1>
+      <p class="rise mt-8 max-w-xl text-sm leading-loose tracking-wider text-silver md:text-base" style="--rise-delay: 0.6s">
+        {T.heroText}
+      </p>
+      <div class="rise mt-10 flex flex-wrap gap-6 font-mono text-[0.65rem] tracking-[0.25em]" style="--rise-delay: 0.9s">
+        {T.legend.map((l) => <span class={l.cls}>{l.label}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 时间线 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 pb-32 md:px-10">
+    {
+      T.chapters.map((ch) => (
+        <div class="pt-24 md:pt-32">
+          <div class="reveal md:grid md:grid-cols-[240px_1fr] md:gap-12">
+            <div>
+              <p class="kicker">{ch.no} // {ch.range}</p>
+              <h2 class="headline-cn mt-4 text-3xl text-star md:text-4xl">{ch.title}</h2>
+            </div>
+            <p class="mt-6 max-w-lg self-end text-sm leading-loose text-silver md:mt-0">
+              {ch.blurb}
+            </p>
+          </div>
+
+          <div class="mt-12 border-l border-white/10 md:ml-[110px]">
+            {byChapter(ch.id).map((m, i) => (
+              <article
+                class="reveal group relative py-8 pl-8 transition-colors duration-500 hover:bg-white/[0.02] md:grid md:grid-cols-[140px_1fr] md:gap-10 md:pl-12"
+                style={`--reveal-delay: ${Math.min(i * 0.08, 0.4)}s`}
+              >
+                <span
+                  class:list={[
+                    'absolute -left-[3.5px] top-[3.1rem] h-[7px] w-[7px] rounded-full transition-all duration-500',
+                    m.data.tag === 'CN'
+                      ? 'bg-ion group-hover:shadow-[0_0_12px_2px_rgba(77,184,255,0.5)]'
+                      : m.data.tag === 'FUTURE'
+                        ? 'bg-engine group-hover:shadow-[0_0_12px_2px_rgba(255,122,69,0.5)]'
+                        : 'bg-silver group-hover:shadow-[0_0_12px_2px_rgba(154,167,189,0.5)]',
+                  ]}
+                />
+                <p class="font-display text-2xl tracking-wider text-star md:text-right">
+                  {m.data.year}
+                </p>
+                <div class="mt-3 md:mt-1">
+                  <div class="flex flex-wrap items-center gap-4">
+                    <h3 class="text-lg tracking-wider text-star">{loc(m).title}</h3>
+                    <span
+                      class:list={[
+                        'border px-2 py-0.5 font-mono text-[0.55rem] tracking-[0.25em]',
+                        tagStyle[m.data.tag],
+                      ]}
+                    >
+                      {m.data.tag}
+                    </span>
+                  </div>
+                  <p class="mt-2 max-w-xl text-sm leading-relaxed text-silver">{loc(m).desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <!-- 收尾 -->
+    <div class="reveal mt-24 border border-white/10 p-10 text-center md:p-16">
+      <p class="kicker">{T.endKicker}</p>
+      <p class="headline-cn mt-6 text-xl text-star md:text-2xl">
+        {T.endTitle}
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a
+          href={p('/ocean')}
+          class="border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-deepsea/50 hover:text-deepsea"
+        >
+          {T.ctaOcean}
+        </a>
+        <a
+          href={p('/technology')}
+          class="border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-ion/50 hover:text-ion"
+        >
+          {T.ctaTech}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

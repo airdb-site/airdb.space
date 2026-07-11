@@ -1,0 +1,261 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Starfield from '../Starfield.astro';
+
+type Lang = 'zh' | 'en';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = (route: string) => (lang === 'zh' ? route : '/en' + route);
+
+const T = {
+  zh: {
+    kicker: 'AIRDB.SPACE // TO THE STARS, INTO THE DEEP',
+    h1a: '我们的征途',
+    h1b: '是星辰大海',
+    heroText: '向上，是深空与群星；向下，是万米深渊。 这是人类共同的方向，也是我们正在走的路。',
+    scroll: 'SCROLL',
+    doorsKicker: 'CHAPTER SELECT // 三个方向',
+    doorsTitle: '仰望 · 潜入 · 积累',
+    enter: '进入 →',
+    doors: [
+      { title: '星辰', sub: 'SPACE', desc: '向上仰望。从嫦娥到天问，从近地轨道到深空 —— 人类离开摇篮的每一次点火。' },
+      { title: '大海', sub: 'OCEAN', desc: '向下潜入。星辰大海，一半在海 —— 万米深渊是离我们最近的未知宇宙。' },
+      { title: '科技', sub: 'TECHNOLOGY', desc: '向内积累。AI 与工程的长期沉淀，是我们敢于谈论探索的全部底气。' },
+    ],
+    tlKicker: 'MISSION LOG // 探索的刻度',
+    tlTitle: '人类走过的每一步',
+    tlHint: '1961 — 2024 · 横向滑动 →',
+    milestones: [
+      { year: '1961', title: '东方一号', desc: '加加林成为进入太空的第一人', tag: 'SPACE' },
+      { year: '1969', title: '阿波罗 11 号', desc: '人类的一大步，踏上月球', tag: 'SPACE' },
+      { year: '1977', title: '旅行者 1 号', desc: '启程飞向星际空间，至今仍在航行', tag: 'SPACE' },
+      { year: '2003', title: '神舟五号', desc: '中国首次载人航天飞行', tag: 'SPACE' },
+      { year: '2012', title: '蛟龙号', desc: '下潜 7062 米，进入深海俱乐部', tag: 'OCEAN' },
+      { year: '2019', title: '嫦娥四号', desc: '人类首次软着陆月球背面', tag: 'SPACE' },
+      { year: '2020', title: '奋斗者号', desc: '坐底马里亚纳海沟 10909 米', tag: 'OCEAN' },
+      { year: '2021', title: '天问一号', desc: '祝融号驶上火星乌托邦平原', tag: 'SPACE' },
+      { year: '2022', title: '天宫空间站', desc: '中国空间站全面建成', tag: 'SPACE' },
+      { year: '2024', title: '嫦娥六号', desc: '人类首次月背采样返回', tag: 'SPACE' },
+    ],
+    fdKicker: 'FOUNDATION // 为什么是我们',
+    fdTitleA: '仰望星空之前，',
+    fdTitleB: '先把地基打深',
+    fdText:
+      '探索不是浪漫的冲动，而是长期主义的工程。我们在 AI、数据与基础设施上的每一次积累， 都是未来某一次「点火」的燃料。走得慢没关系，重要的是每一步都算数。',
+    fdCta: '了解我们的科技 →',
+    foundations: [
+      { key: 'AI', label: '人工智能', desc: '从模型到应用的完整实践' },
+      { key: 'DATA', label: '数据工程', desc: '海量数据的采集、治理与洞察' },
+      { key: 'INFRA', label: '基础设施', desc: '稳定可靠的云原生工程底座' },
+      { key: 'OSS', label: '开源生态', desc: 'github.com/airdb 持续构建' },
+    ],
+  },
+  en: {
+    kicker: 'AIRDB.SPACE // 我们的征途是星辰大海',
+    h1a: 'To the stars, ',
+    h1b: 'into the deep',
+    heroText:
+      'Above: deep space and the stars. Below: the ten-thousand-meter deep. This is humanity’s shared direction — and the road we are walking.',
+    scroll: 'SCROLL',
+    doorsKicker: 'CHAPTER SELECT // THREE DIRECTIONS',
+    doorsTitle: 'Look up · Dive down · Build inward',
+    enter: 'Enter →',
+    doors: [
+      { title: 'Space', sub: '星辰', desc: 'Look up. From Chang’e to Tianwen, from low orbit to deep space — every ignition that carries humanity out of the cradle.' },
+      { title: 'Ocean', sub: '大海', desc: 'Dive down. Half of “the stars and the sea” is the sea — the hadal trench is the nearest unknown universe.' },
+      { title: 'Technology', sub: '科技', desc: 'Build inward. Years of AI and engineering are the confidence behind every word we say about exploration.' },
+    ],
+    tlKicker: 'MISSION LOG // MARKS OF EXPLORATION',
+    tlTitle: 'Every step humanity has taken',
+    tlHint: '1961 — 2024 · scroll →',
+    milestones: [
+      { year: '1961', title: 'Vostok 1', desc: 'Gagarin becomes the first human in space', tag: 'SPACE' },
+      { year: '1969', title: 'Apollo 11', desc: 'One giant leap — footprints on the Moon', tag: 'SPACE' },
+      { year: '1977', title: 'Voyager 1', desc: 'Bound for interstellar space, still sailing', tag: 'SPACE' },
+      { year: '2003', title: 'Shenzhou 5', desc: 'China’s first crewed spaceflight', tag: 'SPACE' },
+      { year: '2012', title: 'Jiaolong', desc: 'Dives 7,062 m into the deep-sea club', tag: 'OCEAN' },
+      { year: '2019', title: 'Chang’e 4', desc: 'First soft landing on the Moon’s far side', tag: 'SPACE' },
+      { year: '2020', title: 'Fendouzhe', desc: 'Touches down at 10,909 m in the Mariana Trench', tag: 'OCEAN' },
+      { year: '2021', title: 'Tianwen 1', desc: 'Zhurong drives onto Utopia Planitia, Mars', tag: 'SPACE' },
+      { year: '2022', title: 'Tiangong', desc: 'China’s space station fully assembled', tag: 'SPACE' },
+      { year: '2024', title: 'Chang’e 6', desc: 'First samples returned from the lunar far side', tag: 'SPACE' },
+    ],
+    fdKicker: 'FOUNDATION // WHY US',
+    fdTitleA: 'Before looking up,',
+    fdTitleB: 'dig the foundation deep',
+    fdText:
+      'Exploration is not a romantic impulse — it is long-term engineering. Every bit of groundwork in AI, data and infrastructure is fuel for an ignition to come. Slow is fine; what matters is that every step counts.',
+    fdCta: 'Explore our technology →',
+    foundations: [
+      { key: 'AI', label: 'Artificial Intelligence', desc: 'From models to production practice' },
+      { key: 'DATA', label: 'Data Engineering', desc: 'Collection, governance and insight at scale' },
+      { key: 'INFRA', label: 'Infrastructure', desc: 'A reliable cloud-native foundation' },
+      { key: 'OSS', label: 'Open Source', desc: 'Building in the open at github.com/airdb' },
+    ],
+  },
+}[lang];
+
+const doorMeta = [
+  { href: p('/space'), no: '01', accent: 'group-hover:text-ion', glow: 'from-ion/12', bar: 'bg-ion' },
+  { href: p('/ocean'), no: '02', accent: 'group-hover:text-deepsea', glow: 'from-deepsea/12', bar: 'bg-deepsea' },
+  { href: p('/technology'), no: '03', accent: 'group-hover:text-engine', glow: 'from-engine/10', bar: 'bg-engine' },
+];
+
+const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — To the Stars, Into the Deep';
+---
+
+<Layout lang={lang} path="/" title={title}>
+  <!-- ============ HERO ============ -->
+  <section class="relative flex h-svh min-h-[640px] items-center justify-center overflow-hidden">
+    <Starfield />
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-space"></div>
+    <div class="pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ion/5 blur-[120px]"></div>
+
+    <div class="relative z-10 px-6 text-center">
+      <p class="kicker rise" style="--rise-delay: 0.2s">
+        {T.kicker}
+      </p>
+      <h1
+        class="headline-cn rise mt-8 text-4xl text-star sm:text-5xl md:text-6xl lg:text-7xl"
+        style="--rise-delay: 0.5s"
+      >
+        {T.h1a}<br class="sm:hidden" />{T.h1b}
+      </h1>
+      <p
+        class="rise mx-auto mt-8 max-w-xl text-sm leading-relaxed tracking-wider text-silver md:text-base"
+        style="--rise-delay: 0.9s"
+      >
+        {T.heroText}
+      </p>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 rise" style="--rise-delay: 1.4s">
+      <div class="scroll-cue flex flex-col items-center gap-2">
+        <span class="font-mono text-[0.6rem] tracking-[0.35em] text-dim">{T.scroll}</span>
+        <span class="block h-8 w-px bg-gradient-to-b from-silver/60 to-transparent"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 三扇门 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 py-28 md:px-10 md:py-36">
+    <p class="kicker reveal">{T.doorsKicker}</p>
+    <h2 class="headline-cn reveal mt-6 text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+      {T.doorsTitle}
+    </h2>
+
+    <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-white/5 md:grid-cols-3">
+      {
+        T.doors.map((door, i) => (
+          <a
+            href={doorMeta[i].href}
+            class="group relative flex min-h-[340px] flex-col justify-between bg-space p-8 transition-colors duration-500 hover:bg-space-2 md:p-10 reveal"
+            style={`--reveal-delay: ${0.15 * i}s`}
+          >
+            <div class={`pointer-events-none absolute inset-0 bg-gradient-to-t ${doorMeta[i].glow} to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100`} />
+            <div class={`absolute left-0 top-0 h-px w-0 ${doorMeta[i].bar} transition-all duration-700 group-hover:w-full`} />
+
+            <div class="relative">
+              <span class="font-mono text-xs tracking-[0.3em] text-dim">{doorMeta[i].no}</span>
+              <h3 class="headline-cn mt-6 text-3xl text-star md:text-4xl">{door.title}</h3>
+              <p class={`mt-2 font-display text-[0.65rem] tracking-[0.4em] text-dim transition-colors duration-500 ${doorMeta[i].accent}`}>
+                {door.sub}
+              </p>
+            </div>
+
+            <div class="relative">
+              <p class="text-sm leading-relaxed text-silver">{door.desc}</p>
+              <span class="mt-6 inline-block font-mono text-xs tracking-[0.25em] text-dim transition-all duration-500 group-hover:translate-x-2 group-hover:text-star">
+                {T.enter}
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ============ 探索时间线 ============ -->
+  <section class="relative border-y border-white/5 bg-void py-28 md:py-36">
+    <div class="mx-auto max-w-7xl px-6 md:px-10">
+      <p class="kicker reveal">{T.tlKicker}</p>
+      <div class="mt-6 flex flex-wrap items-end justify-between gap-4">
+        <h2 class="headline-cn reveal text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+          {T.tlTitle}
+        </h2>
+        <p class="reveal font-mono text-xs tracking-[0.2em] text-dim" style="--reveal-delay: 0.2s">
+          {T.tlHint}
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-scroll reveal mt-16 overflow-x-auto px-6 pb-6 md:px-10" style="--reveal-delay: 0.25s">
+      <div class="flex min-w-max gap-px bg-white/5">
+        {
+          T.milestones.map((m) => (
+            <div class="group w-56 shrink-0 bg-void p-6 transition-colors duration-500 hover:bg-space-2">
+              <span
+                class:list={[
+                  'font-mono text-[0.6rem] tracking-[0.3em]',
+                  m.tag === 'OCEAN' ? 'text-deepsea' : 'text-ion',
+                ]}
+              >
+                {m.tag}
+              </span>
+              <p class="mt-4 font-display text-2xl tracking-wider text-star">{m.year}</p>
+              <div class="mt-4 h-px w-8 bg-dim/40 transition-all duration-500 group-hover:w-16 group-hover:bg-silver/60" />
+              <h3 class="mt-4 text-base tracking-wider text-star">{m.title}</h3>
+              <p class="mt-2 text-xs leading-relaxed text-silver">{m.desc}</p>
+            </div>
+          ))
+        }
+        <div class="flex w-56 shrink-0 items-center justify-center bg-void p-6">
+          <p class="font-mono text-xs leading-loose tracking-[0.25em] text-dim">
+            NEXT<br />MISSION<br /><span class="text-engine">// TBD</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 科技根基 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 py-28 md:px-10 md:py-36">
+    <div class="grid gap-16 md:grid-cols-2">
+      <div>
+        <p class="kicker reveal">{T.fdKicker}</p>
+        <h2 class="headline-cn reveal mt-6 text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+          {T.fdTitleA}<br />{T.fdTitleB}
+        </h2>
+        <p class="reveal mt-8 max-w-md text-sm leading-loose text-silver" style="--reveal-delay: 0.2s">
+          {T.fdText}
+        </p>
+        <a
+          href={p('/technology')}
+          class="reveal mt-10 inline-block border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-ion/50 hover:text-ion"
+          style="--reveal-delay: 0.3s"
+        >
+          {T.fdCta}
+        </a>
+      </div>
+
+      <div class="grid content-center gap-px bg-white/5">
+        {
+          T.foundations.map((f, i) => (
+            <div
+              class="reveal group flex items-baseline gap-6 bg-space p-6 transition-colors duration-500 hover:bg-space-2"
+              style={`--reveal-delay: ${0.1 + i * 0.1}s`}
+            >
+              <span class="w-16 shrink-0 font-mono text-xs tracking-[0.2em] text-ion">{f.key}</span>
+              <div>
+                <h3 class="text-sm tracking-[0.15em] text-star">{f.label}</h3>
+                <p class="mt-1 text-xs leading-relaxed text-silver">{f.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

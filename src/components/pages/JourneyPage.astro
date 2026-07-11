@@ -1,0 +1,154 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+type Lang = 'zh' | 'en';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = (route: string) => (lang === 'zh' ? route : '/en' + route);
+
+type Status = 'done' | 'current' | 'next';
+
+const T = {
+  zh: {
+    title: '历程 · Journey — airdb.space',
+    desc: 'airdb 的航行日志：从公开积累到点火升空，每一步都走得稳一些。',
+    kicker: '04 // JOURNEY · VOYAGE LOG',
+    h1: '历程',
+    heroText: '宏大的愿景，由具体的小步组成。 这是我们自己的航行日志 —— 已经走过的，和即将启程的。',
+    log: [
+      { no: 'LOG 01', key: 'ORIGIN', title: '起点 · 公开地积累', desc: 'airdb 在 GitHub 上建立。我们选择把积累的过程公开：公开地写、公开地错、公开地改进。', status: 'done' as Status },
+      { no: 'LOG 02', key: 'BUILD', title: '沉淀 · 打深地基', desc: '工具、类库与工程实践持续沉淀，数据与基础设施能力逐渐成型 —— 不追热点，只攒复利。', status: 'done' as Status },
+      { no: 'LOG 03', key: 'AI ERA', title: '智能 · 换上新引擎', desc: '全面转向大模型与智能体工程。AI 不是终点，而是让我们走得更远的推进器。', status: 'done' as Status },
+      { no: 'LOG 04', key: 'IGNITION', title: '点火 · airdb.space 上线', desc: '2026 年，这个网站点火升空：星空 Hero、三扇门 —— 愿景第一次立了起来。', status: 'done' as Status },
+      { no: 'LOG 05', key: 'ORBIT', title: '入轨 · 星辰与科技', desc: '星辰篇章的探索时间线、科技篇章的地基四根桩，先后点亮。', status: 'done' as Status },
+      { no: 'LOG 06', key: 'CRUISE', title: '巡航 · 潜入大海', desc: '大海篇章完成万米下潜，这份航行日志也随之上线。', status: 'done' as Status },
+      { no: 'LOG 07', key: 'DEEP SPACE', title: '深空 · 走向更远', desc: '中英双语、SEO 与分享卡片就绪。接下来：更多篇章、更远的目标 —— 愿景可以很远，每一步都要走稳。', status: 'current' as Status },
+    ],
+    status: {
+      done: { label: 'DONE', cls: 'text-silver border-silver/30' },
+      current: { label: 'NOW', cls: 'text-deepsea border-deepsea/50' },
+      next: { label: 'NEXT', cls: 'text-engine border-engine/40' },
+    },
+    endKicker: 'HEADING // 航向不变',
+    endTitle: '我们的征途是星辰大海。',
+    endText: '这不是一句口号，而是一份日程表 —— 上面的每一行，都会被认真地执行。',
+    ctaSpace: '仰望星辰 →',
+    ctaOcean: '潜入大海 →',
+  },
+  en: {
+    title: 'Journey — airdb.space',
+    desc: 'The voyage log of airdb: from building in the open to liftoff — every step taken steadily.',
+    kicker: '04 // JOURNEY · VOYAGE LOG',
+    h1: 'Journey',
+    heroText:
+      'A grand vision is made of concrete small steps. This is our own voyage log — the road behind us, and the legs about to begin.',
+    log: [
+      { no: 'LOG 01', key: 'ORIGIN', title: 'Origin · Building in the open', desc: 'airdb begins on GitHub. We chose to accumulate in public: write openly, fail openly, improve openly.', status: 'done' as Status },
+      { no: 'LOG 02', key: 'BUILD', title: 'Foundation · Digging deep', desc: 'Tools, libraries and engineering practice pile up; data and infrastructure capabilities take shape — no hype, just compound interest.', status: 'done' as Status },
+      { no: 'LOG 03', key: 'AI ERA', title: 'Intelligence · A new engine', desc: 'A full turn toward large models and agent engineering. AI is not the destination — it is the thruster that takes us farther.', status: 'done' as Status },
+      { no: 'LOG 04', key: 'IGNITION', title: 'Ignition · airdb.space lifts off', desc: 'In 2026 this site lifts off: the starfield hero and three doors — the vision stands up for the first time.', status: 'done' as Status },
+      { no: 'LOG 05', key: 'ORBIT', title: 'Orbit · Space and Technology', desc: 'The Space chapter’s timeline and the Technology chapter’s four pillars light up.', status: 'done' as Status },
+      { no: 'LOG 06', key: 'CRUISE', title: 'Cruise · Into the deep', desc: 'The Ocean chapter completes its ten-thousand-meter dive, and this voyage log comes online.', status: 'done' as Status },
+      { no: 'LOG 07', key: 'DEEP SPACE', title: 'Deep space · Farther still', desc: 'Bilingual, SEO and share cards are in place. Next: more chapters, farther goals — the vision can be far; every step must be steady.', status: 'current' as Status },
+    ],
+    status: {
+      done: { label: 'DONE', cls: 'text-silver border-silver/30' },
+      current: { label: 'NOW', cls: 'text-deepsea border-deepsea/50' },
+      next: { label: 'NEXT', cls: 'text-engine border-engine/40' },
+    },
+    endKicker: 'HEADING // UNCHANGED',
+    endTitle: 'Our voyage is to the stars and the deep sea.',
+    endText: 'Not a slogan — a schedule. Every line on it will be executed, carefully.',
+    ctaSpace: 'Look up to the stars →',
+    ctaOcean: 'Dive into the ocean →',
+  },
+}[lang];
+---
+
+<Layout lang={lang} path="/journey" title={T.title} description={T.desc}>
+  <!-- ============ HERO ============ -->
+  <section class="relative flex h-[72svh] min-h-[520px] items-center overflow-hidden">
+    <div class="blueprint-grid absolute inset-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute left-[-10%] top-[20%] h-[45vh] w-[35vw] rounded-full bg-deepsea/5 blur-[120px]"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
+      <p class="kicker rise" style="--rise-delay: 0.1s">{T.kicker}</p>
+      <h1 class="headline-cn rise mt-6 text-5xl text-star md:text-7xl" style="--rise-delay: 0.3s">
+        {T.h1}
+      </h1>
+      <p class="rise mt-8 max-w-xl text-sm leading-loose tracking-wider text-silver md:text-base" style="--rise-delay: 0.6s">
+        {T.heroText}
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 航行日志 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 pb-32 md:px-10">
+    <div class="border-l border-white/10 md:ml-[110px]">
+      {
+        T.log.map((entry, i) => (
+          <article
+            class="reveal group relative py-10 pl-8 transition-colors duration-500 hover:bg-white/[0.02] md:grid md:grid-cols-[170px_1fr] md:gap-10 md:pl-12"
+            style={`--reveal-delay: ${Math.min(i * 0.06, 0.3)}s`}
+          >
+            <span
+              class:list={[
+                'absolute -left-[3.5px] top-[3.6rem] h-[7px] w-[7px] rounded-full transition-all duration-500',
+                entry.status === 'current'
+                  ? 'bg-deepsea shadow-[0_0_12px_2px_rgba(45,212,191,0.4)]'
+                  : entry.status === 'next'
+                    ? 'border border-engine/60 bg-transparent'
+                    : 'bg-silver/70',
+              ]}
+            />
+            <div class="md:text-right">
+              <p class="font-mono text-xs tracking-[0.3em] text-dim">{entry.no}</p>
+              <p class="mt-2 font-display text-sm tracking-[0.2em] text-star">{entry.key}</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+              <div class="flex flex-wrap items-center gap-4">
+                <h2 class="text-lg tracking-wider text-star">{entry.title}</h2>
+                <span
+                  class:list={[
+                    'border px-2 py-0.5 font-mono text-[0.55rem] tracking-[0.25em]',
+                    T.status[entry.status].cls,
+                  ]}
+                >
+                  {T.status[entry.status].label}
+                </span>
+              </div>
+              <p class="mt-3 max-w-xl text-sm leading-loose text-silver">{entry.desc}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- 收尾 -->
+    <div class="reveal mt-24 border border-white/10 p-10 text-center md:p-16">
+      <p class="kicker">{T.endKicker}</p>
+      <p class="headline-cn mt-6 text-xl text-star md:text-2xl">
+        {T.endTitle}
+      </p>
+      <p class="mx-auto mt-6 max-w-md text-sm leading-loose text-silver">
+        {T.endText}
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a
+          href={p('/space')}
+          class="border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-ion/50 hover:text-ion"
+        >
+          {T.ctaSpace}
+        </a>
+        <a
+          href={p('/ocean')}
+          class="border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-deepsea/50 hover:text-deepsea"
+        >
+          {T.ctaOcean}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,220 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+type Lang = 'zh' | 'en';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  zh: {
+    title: '科技 · Technology — airdb.space',
+    desc: 'airdb 的科技积累：AI、数据工程、基础设施与开源生态 —— 仰望星空之前，先把地基打深。',
+    kicker: '03 // TECHNOLOGY · FOUNDATION',
+    h1: '科技',
+    heroText:
+      '探索不是浪漫的冲动，而是长期主义的工程。 这里是我们的地基：AI、数据、基础设施与开源 —— 未来每一次「点火」的燃料。',
+    capKicker: 'CAPABILITIES // 四个方向的积累',
+    capTitle: '地基的四根桩',
+    capabilities: [
+      {
+        no: '01',
+        key: 'AI',
+        title: '人工智能',
+        en: 'ARTIFICIAL INTELLIGENCE',
+        desc: '从大模型应用到智能体工程的完整实践：检索增强、工具调用、评测与落地。让 AI 不止于演示，而是进入生产环境稳定工作。',
+        points: ['LLM 应用工程', '智能体 / Agent 编排', '评测与可观测'],
+      },
+      {
+        no: '02',
+        key: 'DATA',
+        title: '数据工程',
+        en: 'DATA ENGINEERING',
+        desc: '海量数据的采集、治理与洞察。数据是探索的燃料 —— 我们相信被认真治理过的数据，才配得上认真的决策。',
+        points: ['采集与清洗管道', '数据治理与质量', '分析与洞察'],
+      },
+      {
+        no: '03',
+        key: 'INFRA',
+        title: '基础设施',
+        en: 'INFRASTRUCTURE',
+        desc: '云原生的工程底座：容器编排、可观测性、稳定性工程。地基打得越深，仰望星空的时候站得越稳。',
+        points: ['云原生 / Kubernetes', '可观测性体系', 'SRE 与稳定性'],
+      },
+      {
+        no: '04',
+        key: 'OSS',
+        title: '开源生态',
+        en: 'OPEN SOURCE',
+        desc: '在 github.com/airdb 持续构建与开放。开源是我们的工作方式：公开地写、公开地错、公开地改进。',
+        points: ['工具与类库', '工程实践沉淀', '社区共建'],
+      },
+    ],
+    prKicker: 'PRINCIPLES // 我们怎么做事',
+    prTitle: '四条飞行准则',
+    principles: [
+      { key: 'STEADY', title: '每一步都走稳', desc: '不追热点式的冲刺，追求可持续的节奏。上线一步，站稳一步。' },
+      { key: 'SIMPLE', title: '简单优先', desc: '复杂是可靠性的敌人。能用简单方案解决的，绝不引入不必要的抽象。' },
+      { key: 'COMPOUND', title: '长期复利', desc: '技术积累像轨道机动 —— 每一次小的增量，都在改变最终的轨道。' },
+      { key: 'OPEN', title: '开放透明', desc: '代码开源、过程公开。信任来自可以被任何人检验的工作。' },
+    ],
+    ossKicker: 'OPEN SOURCE // 公开构建',
+    ossTitle: '我们的代码，就在轨道上。',
+    ossText: '所有的积累都在 GitHub 上公开进行 —— 欢迎围观、使用，或者一起来造。',
+  },
+  en: {
+    title: 'Technology — airdb.space',
+    desc: 'The engineering behind airdb: AI, data engineering, infrastructure and open source — dig the foundation deep before looking up.',
+    kicker: '03 // TECHNOLOGY · FOUNDATION',
+    h1: 'Technology',
+    heroText:
+      'Exploration is not a romantic impulse — it is long-term engineering. This is our foundation: AI, data, infrastructure and open source — fuel for every ignition to come.',
+    capKicker: 'CAPABILITIES // FOUR DIRECTIONS',
+    capTitle: 'Four pillars of the foundation',
+    capabilities: [
+      {
+        no: '01',
+        key: 'AI',
+        title: 'Artificial Intelligence',
+        en: '人工智能',
+        desc: 'From large-model applications to agent engineering: retrieval, tool use, evaluation and deployment. AI that does not stop at demos, but works reliably in production.',
+        points: ['LLM application engineering', 'Agent orchestration', 'Evaluation & observability'],
+      },
+      {
+        no: '02',
+        key: 'DATA',
+        title: 'Data Engineering',
+        en: '数据工程',
+        desc: 'Collection, governance and insight at scale. Data is the fuel of exploration — only well-governed data deserves serious decisions.',
+        points: ['Ingestion & cleaning pipelines', 'Governance & quality', 'Analytics & insight'],
+      },
+      {
+        no: '03',
+        key: 'INFRA',
+        title: 'Infrastructure',
+        en: '基础设施',
+        desc: 'A cloud-native foundation: orchestration, observability, reliability engineering. The deeper the foundation, the steadier you stand while looking up.',
+        points: ['Cloud native / Kubernetes', 'Observability', 'SRE & reliability'],
+      },
+      {
+        no: '04',
+        key: 'OSS',
+        title: 'Open Source',
+        en: '开源生态',
+        desc: 'Built and shared continuously at github.com/airdb. Open source is how we work: write openly, fail openly, improve openly.',
+        points: ['Tools & libraries', 'Engineering practice', 'Community'],
+      },
+    ],
+    prKicker: 'PRINCIPLES // HOW WE WORK',
+    prTitle: 'Four flight rules',
+    principles: [
+      { key: 'STEADY', title: 'Every step steady', desc: 'No hype sprints — a sustainable pace. Ship a step, hold the ground, take the next.' },
+      { key: 'SIMPLE', title: 'Simplicity first', desc: 'Complexity is the enemy of reliability. Never add abstraction a simple solution can do without.' },
+      { key: 'COMPOUND', title: 'Long-term compounding', desc: 'Accumulation works like orbital mechanics — every small burn changes the final trajectory.' },
+      { key: 'OPEN', title: 'Open & transparent', desc: 'Open code, open process. Trust comes from work anyone can verify.' },
+    ],
+    ossKicker: 'OPEN SOURCE // BUILT IN PUBLIC',
+    ossTitle: 'Our code is already in orbit.',
+    ossText: 'Everything we build happens in the open on GitHub — watch, use, or build with us.',
+  },
+}[lang];
+---
+
+<Layout lang={lang} path="/technology" title={T.title} description={T.desc}>
+  <!-- ============ HERO ============ -->
+  <section class="relative flex h-[72svh] min-h-[520px] items-center overflow-hidden">
+    <div class="blueprint-grid absolute inset-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute right-[-10%] top-[10%] h-[50vh] w-[40vw] rounded-full bg-engine/5 blur-[120px]"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
+      <p class="kicker rise" style="--rise-delay: 0.1s">{T.kicker}</p>
+      <h1 class="headline-cn rise mt-6 text-5xl text-star md:text-7xl" style="--rise-delay: 0.3s">
+        {T.h1}
+      </h1>
+      <p class="rise mt-8 max-w-xl text-sm leading-loose tracking-wider text-silver md:text-base" style="--rise-delay: 0.6s">
+        {T.heroText}
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 能力矩阵 ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+    <p class="kicker reveal">{T.capKicker}</p>
+    <h2 class="headline-cn reveal mt-6 text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+      {T.capTitle}
+    </h2>
+
+    <div class="mt-16 grid gap-px bg-white/5 md:grid-cols-2">
+      {
+        T.capabilities.map((c, i) => (
+          <div
+            class="reveal group relative bg-space p-8 transition-colors duration-500 hover:bg-space-2 md:p-12"
+            style={`--reveal-delay: ${(i % 2) * 0.12}s`}
+          >
+            <div class="absolute left-0 top-0 h-px w-0 bg-ion transition-all duration-700 group-hover:w-full" />
+            <div class="flex items-baseline justify-between">
+              <span class="font-mono text-xs tracking-[0.3em] text-dim">{c.no}</span>
+              <span class="font-mono text-xs tracking-[0.3em] text-ion">{c.key}</span>
+            </div>
+            <h3 class="headline-cn mt-8 text-2xl text-star">{c.title}</h3>
+            <p class="mt-2 font-display text-[0.6rem] tracking-[0.35em] text-dim">{c.en}</p>
+            <p class="mt-6 text-sm leading-loose text-silver">{c.desc}</p>
+            <ul class="mt-8 space-y-2">
+              {c.points.map((pt) => (
+                <li class="flex items-center gap-3 font-mono text-xs tracking-[0.15em] text-silver">
+                  <span class="h-px w-4 bg-ion/60" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ============ 技术原则 ============ -->
+  <section class="relative border-y border-white/5 bg-void py-24 md:py-32">
+    <div class="mx-auto max-w-7xl px-6 md:px-10">
+      <p class="kicker reveal">{T.prKicker}</p>
+      <h2 class="headline-cn reveal mt-6 text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
+        {T.prTitle}
+      </h2>
+
+      <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        {
+          T.principles.map((pr, i) => (
+            <div class="reveal" style={`--reveal-delay: ${i * 0.1}s`}>
+              <p class="font-mono text-[0.6rem] tracking-[0.3em] text-engine">{pr.key}</p>
+              <div class="mt-4 h-px w-10 bg-white/15" />
+              <h3 class="mt-5 text-base tracking-[0.1em] text-star">{pr.title}</h3>
+              <p class="mt-3 text-xs leading-loose text-silver">{pr.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 开源 CTA ============ -->
+  <section class="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+    <div class="reveal border border-white/10 p-10 text-center md:p-16">
+      <p class="kicker">{T.ossKicker}</p>
+      <p class="headline-cn mt-6 text-xl text-star md:text-2xl">
+        {T.ossTitle}
+      </p>
+      <p class="mx-auto mt-6 max-w-md text-sm leading-loose text-silver">
+        {T.ossText}
+      </p>
+      <a
+        href="https://github.com/airdb"
+        target="_blank"
+        rel="noopener"
+        class="mt-10 inline-block border border-white/10 px-8 py-3 font-mono text-xs tracking-[0.3em] text-silver transition-all duration-500 hover:border-ion/50 hover:text-ion"
+      >
+        GITHUB.COM/AIRDB ↗
+      </a>
+    </div>
+  </section>
+</Layout>
