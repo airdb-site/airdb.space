@@ -15,7 +15,6 @@ run: ## Run locally
 	pnpm dev
 
 install: ## Install dependencies
-	pnpm config set allow-builds esbuild
 	#pnpm approve-builds --all
 	pnpm install --frozen-lockfile
 
