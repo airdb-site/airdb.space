@@ -1,5 +1,5 @@
-# LABEL Maintainer="dean"  Description="https://github.com/airdb"
-SERVICE := https://airdb.dev
+# LABEL Maintainer="dean"  Description="https://github.com/airdb-site"
+SERVICE := https://airdb.space
 
 all: help
 
@@ -15,7 +15,7 @@ run: ## Run locally
 	pnpm dev
 
 install: ## Install dependencies
-	pnpm install --frozen-lockfile
+	pnpm install --frozen-lockfile --allow-build=esbuild
 
 build: ## Build website
 	pnpm build
