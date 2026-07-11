@@ -7,10 +7,5 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - '@astrojs/*'
 
-# 构建脚本白名单：pnpm 10 默认禁止依赖执行 postinstall，
-# esbuild 需要 postinstall 安装/校验其平台二进制，予以批准。
-onlyBuiltDependencies:
-  - esbuild
-
 allowBuilds:
   esbuild: true
