@@ -15,7 +15,8 @@ run: ## Run locally
 	pnpm dev
 
 install: ## Install dependencies
-	pnpm install --frozen-lockfile --allow-build=esbuild
+	pnpm approve-builds --all
+	pnpm install --frozen-lockfile
 
 build: ## Build website
 	pnpm build
