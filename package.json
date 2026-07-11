@@ -22,10 +22,5 @@
   },
   "devDependencies": {
     "playwright-core": "^1.61.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
   }
 }
