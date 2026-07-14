@@ -20,5 +20,6 @@
     "astro": "^7.0.7",
     "tailwindcss": "^4.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "packageManager": "pnpm@11.9.0"
 }
