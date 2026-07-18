@@ -124,6 +124,9 @@ const T = {
 <Layout lang={lang} path="/technology" title={T.title} description={T.desc}>
   <!-- ============ HERO ============ -->
   <section class="relative flex h-[72svh] min-h-[520px] items-center overflow-hidden">
+    <div class="hero-photo absolute inset-y-0 right-0 w-full md:w-[68%]">
+      <img src="/images/tech/rainforest-field-station.png" alt="AirDB 野外科研工作站" class="h-full w-full object-cover" fetchpriority="high" />
+    </div>
     <div class="blueprint-grid absolute inset-0" aria-hidden="true"></div>
     <div class="pointer-events-none absolute right-[-10%] top-[10%] h-[50vh] w-[40vw] rounded-full bg-engine/5 blur-[120px]"></div>
 
@@ -171,6 +174,18 @@ const T = {
           </div>
         ))
       }
+    </div>
+
+    <div class="mt-20 grid gap-3 md:grid-cols-12 md:grid-rows-2">
+      <figure class="media-frame reveal overflow-hidden md:col-span-7 md:row-span-2">
+        <img src="/images/tech/environmental-sensor-maintenance.png" alt="多参数环境监测设备维护" loading="lazy" class="h-full min-h-[420px] w-full object-cover" />
+      </figure>
+      <figure class="media-frame reveal overflow-hidden md:col-span-5">
+        <img src="/images/tech/field-data-analysis.png" alt="野外数据分析与校准" loading="lazy" class="h-full min-h-[220px] w-full object-cover" />
+      </figure>
+      <figure class="media-frame reveal overflow-hidden md:col-span-5">
+        <img src="/images/tech/agritech-research-center.png" alt="农业科技数据研究中心" loading="lazy" class="h-full min-h-[220px] w-full object-cover" />
+      </figure>
     </div>
   </section>
 

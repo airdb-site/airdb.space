@@ -98,9 +98,9 @@ const T = {
 }[lang];
 
 const doorMeta = [
-  { href: p('/space'), no: '01', accent: 'group-hover:text-ion', glow: 'from-ion/12', bar: 'bg-ion' },
-  { href: p('/ocean'), no: '02', accent: 'group-hover:text-deepsea', glow: 'from-deepsea/12', bar: 'bg-deepsea' },
-  { href: p('/technology'), no: '03', accent: 'group-hover:text-engine', glow: 'from-engine/10', bar: 'bg-engine' },
+  { href: p('/space'), no: '01', image: '/images/space/mission-control-launch.png', accent: 'group-hover:text-ion', bar: 'bg-ion' },
+  { href: p('/ocean'), no: '02', image: '/images/ocean/marine-biotech-research.png', accent: 'group-hover:text-deepsea', bar: 'bg-deepsea' },
+  { href: p('/technology'), no: '03', image: '/images/tech/rainforest-field-station.png', accent: 'group-hover:text-engine', bar: 'bg-engine' },
 ];
 
 const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — To the Stars, Into the Deep';
@@ -110,21 +110,24 @@ const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — 
   <!-- ============ HERO ============ -->
   <section class="relative flex h-svh min-h-[640px] items-center justify-center overflow-hidden">
     <Starfield />
+    <div class="hero-photo absolute inset-y-0 right-0 w-full md:w-[72%]">
+      <img src="/images/space/mission-control-launch.png" alt="" class="h-full w-full object-cover object-center" fetchpriority="high" />
+    </div>
     <div class="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-space"></div>
     <div class="pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ion/5 blur-[120px]"></div>
 
-    <div class="relative z-10 px-6 text-center">
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-6 text-left md:px-10">
       <p class="kicker rise" style="--rise-delay: 0.2s">
         {T.kicker}
       </p>
       <h1
-        class="headline-cn rise mt-8 text-4xl text-star sm:text-5xl md:text-6xl lg:text-7xl"
+        class="headline-cn rise mt-8 max-w-2xl text-4xl text-star sm:text-5xl md:text-6xl lg:text-7xl"
         style="--rise-delay: 0.5s"
       >
         {T.h1a}<br class="sm:hidden" />{T.h1b}
       </h1>
       <p
-        class="rise mx-auto mt-8 max-w-xl text-sm leading-relaxed tracking-wider text-silver md:text-base"
+        class="rise mt-8 max-w-lg text-sm leading-relaxed tracking-wider text-silver md:text-base"
         style="--rise-delay: 0.9s"
       >
         {T.heroText}
@@ -146,18 +149,19 @@ const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — 
       {T.doorsTitle}
     </h2>
 
-    <div class="mt-16 grid gap-px overflow-hidden rounded-sm bg-white/5 md:grid-cols-3">
+    <div class="mt-16 grid gap-px overflow-hidden bg-white/10 md:grid-cols-3">
       {
         T.doors.map((door, i) => (
           <a
             href={doorMeta[i].href}
-            class="group relative flex min-h-[340px] flex-col justify-between bg-space p-8 transition-colors duration-500 hover:bg-space-2 md:p-10 reveal"
+            class="chapter-card group relative flex min-h-[520px] flex-col justify-between overflow-hidden bg-space p-8 md:p-10 reveal"
             style={`--reveal-delay: ${0.15 * i}s`}
           >
-            <div class={`pointer-events-none absolute inset-0 bg-gradient-to-t ${doorMeta[i].glow} to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100`} />
+            <img src={doorMeta[i].image} alt="" loading="lazy" class="absolute inset-0 h-[62%] w-full object-cover transition duration-1000 group-hover:scale-[1.035]" />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-space/30 to-space" />
             <div class={`absolute left-0 top-0 h-px w-0 ${doorMeta[i].bar} transition-all duration-700 group-hover:w-full`} />
 
-            <div class="relative">
+            <div class="relative pt-[270px]">
               <span class="font-mono text-xs tracking-[0.3em] text-dim">{doorMeta[i].no}</span>
               <h3 class="headline-cn mt-6 text-3xl text-star md:text-4xl">{door.title}</h3>
               <p class={`mt-2 font-display text-[0.65rem] tracking-[0.4em] text-dim transition-colors duration-500 ${doorMeta[i].accent}`}>
@@ -222,7 +226,7 @@ const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — 
 
   <!-- ============ 科技根基 ============ -->
   <section class="relative mx-auto max-w-7xl px-6 py-28 md:px-10 md:py-36">
-    <div class="grid gap-16 md:grid-cols-2">
+    <div class="grid gap-16 lg:grid-cols-[1.15fr_.85fr]">
       <div>
         <p class="kicker reveal">{T.fdKicker}</p>
         <h2 class="headline-cn reveal mt-6 text-2xl text-star md:text-4xl" style="--reveal-delay: 0.1s">
@@ -238,6 +242,9 @@ const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — 
         >
           {T.fdCta}
         </a>
+        <figure class="media-frame reveal mt-12 aspect-[16/10] overflow-hidden" style="--reveal-delay: 0.35s">
+          <img src="/images/tech/rainforest-field-station.png" alt="AirDB 野外环境数据采集站" loading="lazy" class="h-full w-full object-cover" />
+        </figure>
       </div>
 
       <div class="grid content-center gap-px bg-white/5">

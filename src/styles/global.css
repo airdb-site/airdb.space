@@ -88,6 +88,46 @@ body {
   background: linear-gradient(90deg, transparent, rgba(154, 167, 189, 0.25), transparent);
 }
 
+/* ---- 影像叙事：照片从暗背景中自然浮现 ---- */
+.hero-photo {
+  opacity: 0.78;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 20%, #000 48%, #000 82%, transparent 100%);
+}
+
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,5,8,.08), transparent 55%, var(--color-space));
+}
+
+.hero-photo--ocean { opacity: 0.68; }
+
+.media-frame {
+  position: relative;
+  border: 1px solid rgba(255,255,255,.1);
+  background: var(--color-void);
+}
+
+.media-frame::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 70px rgba(3,5,8,.24);
+}
+
+.chapter-card img { filter: saturate(.82) brightness(.78); }
+.chapter-card:hover img { filter: saturate(1) brightness(.94); }
+
+@media (max-width: 767px) {
+  .hero-photo {
+    width: 100%;
+    opacity: .42;
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 45%, transparent 92%);
+  }
+}
+
 /* ---- 工程蓝图网格（技术页）---- */
 .blueprint-grid {
   background-image:

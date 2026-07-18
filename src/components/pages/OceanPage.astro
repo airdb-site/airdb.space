@@ -89,6 +89,9 @@ const dotStyle = {
 <Layout lang={lang} path="/ocean" title={T.title} description={T.desc}>
   <!-- ============ HERO · 海平面 ============ -->
   <section class="relative flex h-[80svh] min-h-[560px] items-center overflow-hidden">
+    <div class="hero-photo hero-photo--ocean absolute inset-y-0 right-0 w-full md:w-[68%]">
+      <img src="/images/ocean/marine-biotech-research.png" alt="海洋生物科技研究实验室" class="h-full w-full object-cover" fetchpriority="high" />
+    </div>
     <div class="pointer-events-none absolute inset-x-0 top-0 h-[60vh] bg-gradient-to-b from-deepsea/10 to-transparent"></div>
     <div class="pointer-events-none absolute left-1/3 top-0 h-[40vh] w-[50vw] -translate-x-1/2 rounded-full bg-deepsea/10 blur-[120px]"></div>
 
@@ -137,6 +140,9 @@ const dotStyle = {
     ></div>
 
     <div class="relative mx-auto max-w-7xl px-6 pb-32 md:px-10">
+      <figure class="media-frame reveal relative top-12 mb-16 ml-auto aspect-[16/7] max-w-5xl overflow-hidden border-deepsea/20">
+        <img src="/images/ocean/marine-biotech-research.png" alt="从环境样本到海洋生物数据分析" loading="lazy" class="h-full w-full object-cover" />
+      </figure>
       {
         T.zones.map((z) => (
           <div>
