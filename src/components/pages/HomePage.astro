@@ -195,7 +195,7 @@ const title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — 
       </div>
     </div>
 
-    <div class="timeline-scroll reveal mt-16 overflow-x-auto px-6 pb-6 md:px-10" style="--reveal-delay: 0.25s">
+    <div tabindex="0" role="region" aria-label={lang === 'zh' ? '探索时间线' : 'Exploration timeline'} class="timeline-scroll reveal mt-16 overflow-x-auto px-6 pb-6 md:px-10" style="--reveal-delay: 0.25s">
       <div class="flex min-w-max gap-px bg-white/5">
         {
           T.milestones.map((m) => (

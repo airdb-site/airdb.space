@@ -13,11 +13,13 @@ interface Props {
   lang?: Lang;
   /** 不带语言前缀的路径，如 '/'、'/space'，用于 canonical / hreflang / 语言切换 */
   path?: string;
+  noindex?: boolean;
 }
 
 const SITE = 'https://airdb.space';
 
 const {
+  noindex = false,
   lang = 'zh',
   path = '/',
   title = lang === 'zh' ? 'airdb.space — 星辰大海' : 'airdb.space — To the Stars, Into the Deep',
@@ -86,7 +88,7 @@ const F =
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={zhUrl} />
@@ -107,9 +109,10 @@ const F =
     <meta name="twitter:image" content={`${SITE}/og.png`} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">{lang === 'zh' ? '跳至正文' : 'Skip to content'}</a>
     <header class="fixed top-0 left-0 right-0 z-50 bg-space/70 backdrop-blur-md">
       <div
-        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10"
+        class="site-nav-row mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10"
       >
         <a href={home} class="group flex items-baseline gap-3">
           <span class="font-display text-sm tracking-[0.3em] text-star"
@@ -146,7 +149,7 @@ const F =
       <div class="hairline"></div>
     </header>
 
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 

@@ -10,7 +10,7 @@
   /* 前景 */
   --color-star: #e8edf5;
   --color-silver: #9aa7bd;
-  --color-dim: #55627a;
+  --color-dim: #8492a8;
 
   /* 两个强调色：离子蓝（主）· 引擎橙（辅，极少量） */
   --color-ion: #4db8ff;
@@ -70,8 +70,8 @@ body {
 
 /* ---- 滚动渐显（配合 IntersectionObserver）---- */
 .reveal {
-  opacity: 0;
-  transform: translateY(32px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0s);
@@ -164,4 +164,14 @@ body {
   html { scroll-behavior: auto; }
   .rise, .scroll-cue { animation: none; opacity: 1; transform: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+.skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 100; padding: 1rem; background: var(--color-space); }
+.skip-link:focus { top: .5rem; }
+a:focus-visible { outline: 2px solid var(--color-ion); outline-offset: 4px; }
+@media (max-width: 639px) {
+  .site-nav-row { flex-wrap: wrap; gap: 1rem; padding-block: .75rem; }
+  .site-nav-row nav { width: 100%; justify-content: space-between; gap: .5rem; }
+  .site-nav-row nav a { font-size: .75rem; }
+  html { scroll-padding-top: 8rem; }
 }
